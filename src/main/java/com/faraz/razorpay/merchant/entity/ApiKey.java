@@ -2,10 +2,7 @@ package com.faraz.razorpay.merchant.entity;
 
 import com.faraz.razorpay.common.enums.Environment;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -16,6 +13,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "api_key")
+@Builder
 public class ApiKey {
 
     @Id

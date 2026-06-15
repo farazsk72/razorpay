@@ -1,0 +1,58 @@
+package com.faraz.razorpay.merchant.service.impl;
+
+import com.faraz.razorpay.common.enums.MerchantStatus;
+import com.faraz.razorpay.common.enums.UserRole;
+import com.faraz.razorpay.merchant.dto.request.MerchantSignupRequest;
+import com.faraz.razorpay.merchant.dto.response.MerchantResponse;
+import com.faraz.razorpay.merchant.entity.AppUser;
+import com.faraz.razorpay.merchant.entity.Merchant;
+import com.faraz.razorpay.merchant.repository.AppUserRepository;
+import com.faraz.razorpay.merchant.repository.MerchantRepository;
+import com.faraz.razorpay.merchant.service.AuthService;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+@Slf4j
+public class AuthServiceImpl implements AuthService {
+
+    private final MerchantRepository  merchantRepository;
+    private final AppUserRepository appUserRepository;
+
+    @Override
+    public MerchantResponse signup(MerchantSignupRequest request) {
+        if(merchantRepository.existsByEmail(request.email())){
+            log.error("Merchant with email {} already exists", request.email());
+            throw new RuntimeException("Merchant with email already exists: "+request.email());
+        }
+
+        Merchant merchant = Merchant.builder()
+                .name(request.name())
+                .email(request.email())
+                .businessType(request.businessType())
+                .businessName(request.businessName())
+                .status(MerchantStatus.PENDING_KYC)
+                .build();
+
+        merchant = merchantRepository.save(merchant);
+
+        AppUser appUser = AppUser.builder()
+                .email(request.email())
+                .passwordHash(request.password()) // TODO: encrypt using Bcrypt
+                .merchant(merchant)
+                .role(UserRole.OWNER)
+                .build();
+        appUserRepository.save(appUser);
+
+
+        return new MerchantResponse(
+                merchant.getId(),
+                merchant.getName(),
+                merchant.getEmail(),
+                merchant.getBusinessName(),
+                merchant.getBusinessType(),
+                merchant.getStatus());
+    }
+}
