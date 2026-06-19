@@ -1,6 +1,6 @@
 package com.faraz.razorpay.common.enums;
 
 public enum Environment {
-    PRODUCTION,
+    LIVE,
     TEST
 }

@@ -2,6 +2,7 @@ package com.faraz.razorpay.merchant.service.impl;
 
 import com.faraz.razorpay.common.enums.MerchantStatus;
 import com.faraz.razorpay.common.enums.UserRole;
+import com.faraz.razorpay.common.exception.DuplicateResourceException;
 import com.faraz.razorpay.merchant.dto.request.MerchantSignupRequest;
 import com.faraz.razorpay.merchant.dto.response.MerchantResponse;
 import com.faraz.razorpay.merchant.entity.AppUser;
@@ -12,6 +13,7 @@ import com.faraz.razorpay.merchant.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,10 +24,12 @@ public class AuthServiceImpl implements AuthService {
     private final AppUserRepository appUserRepository;
 
     @Override
+    @Transactional
     public MerchantResponse signup(MerchantSignupRequest request) {
         if(merchantRepository.existsByEmail(request.email())){
             log.error("Merchant with email {} already exists", request.email());
-            throw new RuntimeException("Merchant with email already exists: "+request.email());
+            throw new DuplicateResourceException("DUPLICATE_MERCHANT_EMAIL",
+                    "Merchant with email already exists: "+request.email());
         }
 
         Merchant merchant = Merchant.builder()
