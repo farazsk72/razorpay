@@ -11,7 +11,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_user",
+        indexes = {
+                @Index(name = "idx_app_user_merchant_id", columnList = "merchant_id"),
+                @Index(name = "idx_app_user_email", columnList = "email")
+        }
+)
 @Builder
 public class AppUser {
 

@@ -14,7 +14,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "merchant")
+@Table(name = "merchant",
+        indexes = {
+                @Index(name = "idx_merchant_status", columnList = "status")
+        }
+)
 public class Merchant {
 
     @Id

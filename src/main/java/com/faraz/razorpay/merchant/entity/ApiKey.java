@@ -12,7 +12,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "api_key")
+@Table(name = "api_key",
+        indexes = {
+                @Index(name = "idx_api_key_merchant_env", columnList = "merchant_id, environment, enabled")
+        }
+)
 @Builder
 public class ApiKey {
 
@@ -30,7 +34,7 @@ public class ApiKey {
     @Column(nullable = false, length = 200)
     private String keySecretHash;
 
-    @Column(nullable = false, length = 200)
+    @Column( length = 200)
     private String previousKeySecretHash;
 
     @Enumerated(EnumType.STRING)
