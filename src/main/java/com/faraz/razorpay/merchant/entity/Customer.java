@@ -1,5 +1,6 @@
 package com.faraz.razorpay.merchant.entity;
 
+import com.faraz.razorpay.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "customer")
 @Builder
-public class Customer {
+public class Customer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

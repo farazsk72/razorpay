@@ -2,7 +2,6 @@ package com.faraz.razorpay.payment.service;
 
 import com.faraz.razorpay.payment.dto.request.CreateOrderRequest;
 import com.faraz.razorpay.payment.dto.response.OrderResponse;
-import com.faraz.razorpay.payment.dto.response.PayementResponse;
 import com.faraz.razorpay.payment.dto.response.PaymentResponse;
 
 import java.util.List;

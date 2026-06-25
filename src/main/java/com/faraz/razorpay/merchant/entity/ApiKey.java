@@ -1,5 +1,6 @@
 package com.faraz.razorpay.merchant.entity;
 
+import com.faraz.razorpay.common.entity.BaseEntity;
 import com.faraz.razorpay.common.enums.Environment;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +19,7 @@ import java.util.UUID;
         }
 )
 @Builder
-public class ApiKey {
+public class ApiKey extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

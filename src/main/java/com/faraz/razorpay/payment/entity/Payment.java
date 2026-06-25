@@ -1,5 +1,6 @@
 package com.faraz.razorpay.payment.entity;
 
+import com.faraz.razorpay.common.entity.BaseEntity;
 import com.faraz.razorpay.common.entity.Money;
 import com.faraz.razorpay.common.enums.PaymentMethod;
 import com.faraz.razorpay.common.enums.PaymentStatus;
@@ -26,7 +27,7 @@ import java.util.UUID;
 
         }
 )
-public class Payment {
+public class Payment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

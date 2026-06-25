@@ -1,5 +1,6 @@
 package com.faraz.razorpay.merchant.entity;
 
+import com.faraz.razorpay.common.entity.BaseEntity;
 import com.faraz.razorpay.common.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.*;
@@ -18,7 +19,7 @@ import java.util.UUID;
         }
 )
 @Builder
-public class AppUser {
+public class AppUser extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

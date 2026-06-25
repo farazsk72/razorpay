@@ -1,6 +1,7 @@
 package com.faraz.razorpay.merchant.entity;
 
 
+import com.faraz.razorpay.common.entity.BaseEntity;
 import com.faraz.razorpay.common.enums.BusinessType;
 import com.faraz.razorpay.common.enums.MerchantStatus;
 import jakarta.persistence.*;
@@ -19,7 +20,7 @@ import java.util.UUID;
                 @Index(name = "idx_merchant_status", columnList = "status")
         }
 )
-public class Merchant {
+public class Merchant extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
