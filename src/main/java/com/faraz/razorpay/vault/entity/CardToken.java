@@ -1,11 +1,8 @@
-package com.faraz.razorpay.valut.entity;
+package com.faraz.razorpay.vault.entity;
 
 import com.faraz.razorpay.common.entity.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -14,6 +11,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "card_token")
 public class CardToken extends BaseEntity {
