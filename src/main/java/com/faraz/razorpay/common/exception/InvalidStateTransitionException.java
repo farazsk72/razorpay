@@ -9,7 +9,7 @@ public class InvalidStateTransitionException extends RuntimeException {
     private final String toEvent;
 
     public InvalidStateTransitionException(String fromState, String event) {
-        super("Invalid state transition from"+ fromState + "with event"+ event);
+        super("Invalid state transition from "+ fromState + " with event "+ event);
         this.fromState = fromState;
         this.toEvent = event;
     }

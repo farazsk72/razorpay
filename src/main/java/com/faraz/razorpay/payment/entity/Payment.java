@@ -61,7 +61,7 @@ public class Payment extends BaseEntity {
     @Column(length = 100)
     private String processorReference;
 
-    @Column(length = 10)
+    @Column(length = 50)
     private String errorCode;
 
     @Column(length = 200)

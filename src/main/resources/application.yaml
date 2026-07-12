@@ -11,10 +11,10 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
 
 vault:
-  master-key: uiefe8yrw89rwhjs8udud9w99uoiefdsisdio90we
+  master-key: 'uP9x+rR8N3K9W2vX6mZq1pB3sC5v8xN1zQ3wE5r7tY0='
 
 payment:
   simulator:
@@ -33,3 +33,9 @@ payment:
         min-delay-seconds: 4
         max-delay-seconds: 10
         success-rate: 80
+
+jwt:
+  secret-key: razorpay-super-secret-key-change-in-production-min-32chars
+  access-token-expiry-ms: 900000
+  refresh-token-expiry-days: 7
+  max-sessions-per-user: 2
