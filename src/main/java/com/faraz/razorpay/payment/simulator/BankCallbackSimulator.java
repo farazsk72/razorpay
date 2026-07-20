@@ -24,7 +24,7 @@ public class BankCallbackSimulator {
     private final SimulatorConfig simulatorConfig;
 
     // this method will be called every 5 seconds it will find all the payments from created before 5 sec window
-    @Scheduled(fixedDelayString = "${payment.simulator.poll-interval-ms:5000}")
+//    @Scheduled(fixedDelayString = "${payment.simulator.poll-interval-ms:5000}")
     public void processCallbacks() {
 
         LocalDateTime globalWindow = LocalDateTime.now().minusSeconds(1);

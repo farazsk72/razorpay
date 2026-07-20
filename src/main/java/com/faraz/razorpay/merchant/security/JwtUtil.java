@@ -30,6 +30,7 @@ public class JwtUtil {
                 .expiration(Date.from(now.plusSeconds(60 * 100)))
                 .claim("merchantId", merchantId)
                 .claim("role", role)
+                .signWith(getSecretKey())
                 .compact();
     }
 
@@ -40,5 +41,17 @@ public class JwtUtil {
                 .parseSignedClaims(accessToken)
                 .getPayload();
     }
+
+    public String extractRole(Claims claims) {
+        return claims.get("role", String.class);
+    }
+
+    public String extractMerchantId(Claims claims) {
+        if (claims == null) {
+            return null;
+        }
+        return claims.get("merchantId", String.class);
+    }
+
 
 }

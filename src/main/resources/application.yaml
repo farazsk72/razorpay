@@ -1,3 +1,5 @@
+server:
+    port: 8081
 spring:
   application:
     name: razorpay
@@ -14,7 +16,7 @@ spring:
         format_sql: false
 
 vault:
-  master-key: 'uP9x+rR8N3K9W2vX6mZq1pB3sC5v8xN1zQ3wE5r7tY0='
+  master-key: X/HA8vtpA1jt9F9cMO10h5LwSVhPLXQbAXmh6j8o4zQ=
 
 payment:
   simulator:
