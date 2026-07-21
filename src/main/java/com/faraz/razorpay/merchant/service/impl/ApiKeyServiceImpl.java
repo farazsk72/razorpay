@@ -2,6 +2,7 @@ package com.faraz.razorpay.merchant.service.impl;
 
 import com.faraz.razorpay.common.exception.ResourceNotFoundException;
 import com.faraz.razorpay.common.util.RandomizerUtil;
+import com.faraz.razorpay.merchant.cache.ApiKeyCache;
 import com.faraz.razorpay.merchant.dto.request.CreateApiKeyRequest;
 import com.faraz.razorpay.merchant.dto.response.ApiKeyCreateResponse;
 import com.faraz.razorpay.merchant.dto.response.ApiKeyResponse;
@@ -30,6 +31,7 @@ public class ApiKeyServiceImpl implements ApiKeyService {
     private final ApiKeyRepository apiKeyRepository;
     private final ApiKeyMapper apiKeyMapper;
     private final BCryptPasswordEncoder BCRYPT = new  BCryptPasswordEncoder();
+    private final ApiKeyCache apiKeyCache;
 
     @Override
     @Transactional
@@ -67,6 +69,7 @@ public class ApiKeyServiceImpl implements ApiKeyService {
                 .filter(k -> k.getMerchant().getId().equals(merchantId))
                 .orElseThrow(() -> new ResourceNotFoundException("ApiKey", apiKeyId));
         key.setEnabled(false);
+        apiKeyCache.evict(key.getKeyId());
     }
 
     @Override
@@ -86,6 +89,9 @@ public class ApiKeyServiceImpl implements ApiKeyService {
         key.setRotatedAt(java.time.LocalDateTime.now());
         key.setGracePeriodExpiresAt(LocalDateTime.now().plusHours(24));
         key = apiKeyRepository.save(key);
+
+        apiKeyCache.evict(key.getKeyId());
+
         return new ApiKeyCreateResponse(
                 key.getId(),
                 key.getKeyId(),
